@@ -107,7 +107,6 @@ class AuthTest < ActiveSupport::TestCase
       assert_equal test_data[:expect].name, actual_auth['user']['system_role'], 'Roles match expected role'
     end
   end
-
   # End POST tests
   # --------------------------------------------------------------------------- #
 

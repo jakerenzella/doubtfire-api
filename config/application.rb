@@ -40,7 +40,7 @@ module Doubtfire
     config.institution[:host] = 'localhost:3000' if Rails.env.development?
     config.institution[:host_url] = Rails.env.development? ? "http://#{config.institution[:host]}/" : "https://#{config.institution[:host]}/"
     config.institution[:settings] = ENV['DF_INSTITUTION_SETTINGS_RB'] if ENV['DF_INSTITUTION_SETTINGS_RB']
-    
+
     require "#{Rails.root}/config/#{config.institution[:settings]}" unless config.institution[:settings].nil?
 
     # ==> AAF authentication
@@ -54,6 +54,8 @@ module Doubtfire
       # The secure URL within your application that AAF Rapid Connect should
       # POST responses to (e.g., https://doubtfire.unifoo.edu.au/auth/jwt)
       config.aaf[:callback_url] = ENV['DF_AAF_CALLBACK_URL']
+      # The URL to redirect to after a signout
+      config.aaf[:auth_signout_url] = ENV['DF_AAF_AUTH_SIGNOUT_URL']
       # URL of the unique url provided by rapid connect used for redirect
       # (e.g., https://rapid.aaf.edu.au/jwt/authnrequest/auresearch/XXXXXXX)
       config.aaf[:redirect_url] = ENV['DF_AAF_UNIQUE_URL']

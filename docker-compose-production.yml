@@ -1,0 +1,16 @@
+version: '3.4'
+services:
+  api:
+    build:
+      target: production
+    volumes:
+      - static_files:/doutbfire-api/public
+
+  web:
+    build:
+      target: deploy
+    volumes:
+      - static_files:/doutbfire-web/build
+
+volumes:
+  static_files:

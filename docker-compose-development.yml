@@ -1,0 +1,27 @@
+version: '3.4'
+services:
+  api:
+    build:
+      target: dependencies
+    volumes:
+      - ./:/doubtfire-api
+      - /doubtfire-api/.bundle
+      - /doubtfire-api/tmp
+    depends_on:
+      - web
+
+  web:
+    build:
+      target: development
+    environment:
+      DF_DOCKER_MACHINE_IP: $DF_DOCKER_MACHINE_IP
+    ports:
+      - "4200:4200" # Angular 6
+      - "8000:8000" # Angular 1
+      - "8080:8080" # Angular 1
+    volumes:
+      - ../doubtfire-web:/doubtfire-web
+      - /doubtfire-web/bin
+      - /doubtfire-web/build
+      - /doubtfire-web/node_modules
+      - /doubtfire-web/vendor

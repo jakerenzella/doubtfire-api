@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:18.04 AS dependencies
 
 RUN apt-get update && apt-get install -y curl git
 ENV PATH /root/.rbenv/bin:/root/.rbenv/shims:$PATH
@@ -37,3 +37,7 @@ RUN bundle install --without production replica
 CMD bundle exec rails s
 
 EXPOSE 3000
+
+FROM dependencies AS production
+
+COPY . /doubtfire-api/

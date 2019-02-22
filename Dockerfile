@@ -41,3 +41,10 @@ EXPOSE 3000
 FROM dependencies AS production
 
 COPY . /doubtfire-api/
+
+FROM dependencies AS dockerhub
+
+RUN bundle install --with production replica
+COPY . /doubtfire-api/
+COPY --from=doubtfire-api_web /doubtfire-web/build/ /doubtfire-api/public/
+RUN mkdir -p log/ tmp/
